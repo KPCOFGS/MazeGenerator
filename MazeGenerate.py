@@ -116,6 +116,7 @@ class MazeGenerate():
             'a': (0, 255, 0),  # Green
             'b': (255, 0, 0),  # Red
             ' ': (255, 255, 255),  # White
+            '*': (255, 255, 0) # Yellow
         }
 
         # Read the text file
