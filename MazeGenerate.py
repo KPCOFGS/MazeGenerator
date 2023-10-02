@@ -110,13 +110,12 @@ class MazeGenerate():
                 for j in range(column):
                     file.write(maze_shape[i][j][2])
                 file.write("\n")
-    def visualize_maze(self):
+    def visualize(self):
         colors = {
             'x': (0, 0, 0),    # Black
             'a': (0, 255, 0),  # Green
             'b': (255, 0, 0),  # Red
             ' ': (255, 255, 255),  # White
-            '*': (255, 255, 0) # Yellow
         }
 
         # Read the text file
@@ -139,7 +138,65 @@ class MazeGenerate():
 
         # Save the image (Optional)
         image.save('output_image.png')
-
         # Display the image
         image.show()
+    def visualize(self,maze,step):
+        self.step = step
+        self.maze = maze
+        rows = len(maze)
+        cols = len(maze[0])
+        maze_text=[]
+        maze_1D = []
+        maze_line = ""
+        for i in range(len(maze)):
+            for j in range(len(maze[i])):
+                maze_1D.append(maze[i][j])
+            maze_text.append(maze_1D)
+            maze_1D = []
+        for i in range(len(step)):
+            maze_text[step[i][1]][step[i][2]] = "*"
+        for i in range(len(maze_text)):
+            for j in range(len(maze_text[i])):
+                maze_line = maze_line + maze_text[i][j]
+            maze_line = maze_line + "\n"
+        with open("maze_map.txt","w") as file:
+                pass
+        for line in maze_line.splitlines():
+            #visual_line = ''.join(char_mapping.get(char, char) for char in line)
+            with open("maze_map.txt","a") as file:
+                file.write(line)
+                file.write("\n")
+        colors = {
+            'x': (0, 0, 0),    # Black
+            'a': (0, 255, 0),  # Green
+            'b': (255, 0, 0),  # Red
+            ' ': (255, 255, 255),  # White
+            '*': (255, 255, 0),    # Yellow
+        }
+
+        # Read the text file
+        with open('maze_map.txt', 'r') as file:
+            lines = file.readlines()
+
+        # Calculate image dimensions based on the content of the text file
+        width = max(len(line.strip()) for line in lines)
+        height = len(lines)
+
+        # Create a new image with a white background
+        image = Image.new('RGB', (width, height), (255, 255, 255))
+        draw = ImageDraw.Draw(image)
+
+        # Draw each character with the specified color
+        for y, line in enumerate(lines):
+            for x, char in enumerate(line.strip()):
+                if char in colors:
+                    draw.point((x, y), colors[char])
+
+        # Save the image
+        image.save('output_image.png')
+
+        # Display the image 
+        image.show()
+
+
 
