@@ -4,6 +4,7 @@ class MazeGenerate():
     def __init__(self):
         pass
     def generate(self,row,column):
+        # This function uses randomized Depth First Search algorithm to create the maze
         self.row = row
         self.column = column
         maze_shape = []
@@ -12,10 +13,14 @@ class MazeGenerate():
         maze_shape1 = []
         temp_list = []
         temperory_element = []
+        # check if row and column sizes are more than 5 and they are odd numbers
         if row % 2 != 1 or row <=4:
-            return "row size is not proper"
+            print("row size is not proper")
+            return None
         elif column % 2 != 1 or column <= 4:
-            return "column size is not proper"
+            print("column size is not proper")
+            return None
+        # beginning to create the maze
         for i in range(row):
                 for j in range(column):
                     maze_shape1.append([])
@@ -26,7 +31,7 @@ class MazeGenerate():
                 for j in range(column):
                         maze_shape[i][j].append(i)
                         maze_shape[i][j].append(j)
-                        maze_shape[i][j].append("x")
+                        maze_shape[i][j].append("x") # "x" is the wall
             else:
                 for j in range(column):
                     if j % 2 == 0:
@@ -36,7 +41,8 @@ class MazeGenerate():
                     else:
                         maze_shape[i][j].append(i)
                         maze_shape[i][j].append(j)
-                        maze_shape[i][j].append("u")
+                        maze_shape[i][j].append("u") # "u" is the undiscovered cell
+        # 4 corners, one will be the starting point and another will be the ending point
         vertices = [[maze_shape[1][1]],[maze_shape[-2][1]],[maze_shape[1][-2]],[maze_shape[-2][-2]]]
         current = random.choice(vertices)
         t = current
@@ -79,6 +85,7 @@ class MazeGenerate():
                     action.append(temperory_element[i])               
             temp_list = []
             temperory_element = []
+            # if no more actions to take, that means no more "u" cells, so the whole maze is complete
             try:
                 action[-1]
             except:
@@ -109,7 +116,6 @@ class MazeGenerate():
             'a': (0, 255, 0),  # Green
             'b': (255, 0, 0),  # Red
             ' ': (255, 255, 255),  # White
-            '*': (255, 255, 255),    # Yellow
         }
 
         # Read the text file
@@ -130,9 +136,9 @@ class MazeGenerate():
                 if char in colors:
                     draw.point((x, y), colors[char])
 
-        # Save the image
+        # Save the image (Optional)
         image.save('output_image.png')
 
-        # Display the image (optional)
+        # Display the image
         image.show()
 
