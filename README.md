@@ -9,7 +9,7 @@ row = 101  # values must be odd numbers
 <br>
 column = 55   # values must be odd numbers
 <br>
-maze = MazeGenerate()
+maze = MazeGenerate.MazeGenerate()
 <br>
 maze.generate(row,column)
 <br>
