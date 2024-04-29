@@ -1,7 +1,7 @@
 # MazeGenerator
 
 
-This generates a maze based on input row and column size, and it will solve the maze. Minimum size is 5x5
+This generates a maze based on input row and column size. Minimum size is 5x5
 
 ## Installation
 
