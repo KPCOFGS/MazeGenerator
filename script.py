@@ -153,7 +153,7 @@ class MazeGenerate():
                     draw.point((x, y), colors[char])
 
         # Save the image (Optional)
-        image.save('output_image.png')
+        image.save('maze.png')
     def visualize(self,maze,step):
         self.step = step
         self.maze = maze
@@ -206,7 +206,7 @@ class MazeGenerate():
                     draw.point((x, y), colors[char])
 
         # Save the image
-        image.save('output_image.png')
+        image.save('maze_solved.png')
 generate = MazeGenerate()
 parser = argparse.ArgumentParser(description='Input length and height.')
 parser.add_argument('--length', dest='length', type=int, required=True, help='Length of the shape')
@@ -218,8 +218,13 @@ action = args.action
 row = args.length
 column = args.height
 generate.generate(row,column)
+generate.visualizer()
+
 if action == "generate":
-    generate.visualizer()
+    try:
+        os.remove("maze_solved.png")
+    except:
+        pass
 elif action == "solve":
     stack = Stack()
     solution_not_found = 0
