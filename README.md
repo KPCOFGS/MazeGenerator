@@ -30,6 +30,7 @@ python script.py --length LENGTH --height HEIGHT
 
 * Input values must be an odd number
 * The green dot is the starting point and the red dot is the ending point
+* If `--action` is set to `solve`, it will generate 2 same maps. One is unsolved and another is solved
 
 ## License
 
